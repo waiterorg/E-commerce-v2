@@ -18,3 +18,19 @@ def test_inventory_category_dbfixture(
     assert result.name == name
     assert result.slug == slug
     assert result.is_active == is_active
+
+
+@pytest.mark.parametrize(
+    "slug, is_active",
+    [
+        ("fashion", 1),
+        ("trainers", 1),
+        ("baseball", 1),
+    ],
+)
+def test_inventory_db_category_insert_data(
+    db, category_factory, slug, is_active
+):
+    result = category_factory.create(slug=slug, is_active=is_active)
+    assert result.slug == slug
+    assert result.is_active == is_active
