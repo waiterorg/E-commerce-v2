@@ -100,3 +100,17 @@ def test_inventory_db_product_insert_data(db, product_factory):
     result_product_category = new_product.category.all().count()
     assert "web_id_" in new_product.web_id
     assert result_product_category == 5
+
+
+def test_inventory_db_producttype_insert_data(db, product_type_factory):
+
+    new_type = product_type_factory.create(name="demo_type")
+    assert new_type.name == "demo_type"
+
+
+def test_inventory_db_producttype_uniqueness_integrity(
+    db, product_type_factory
+):
+    product_type_factory.create(name="not_unique")
+    with pytest.raises(IntegrityError):
+        product_type_factory.create(name="not_unique")
