@@ -113,3 +113,21 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ProductType(models.Model):
+    """
+    Product type table
+    """
+
+    name = models.CharField(
+        max_length=255,
+        unique=True,
+        null=False,
+        blank=False,
+        verbose_name=_("type of product"),
+        help_text=_("format: required, unique, max-255"),
+    )
+
+    def __str__(self):
+        return self.name
