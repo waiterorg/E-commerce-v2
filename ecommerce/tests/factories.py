@@ -44,6 +44,14 @@ class ProductTypeFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: "type_%d" % n)
 
 
+class BrandFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Brand
+
+    name = factory.Sequence(lambda n: "brand_%d" % n)
+
+
 register(CategoryFactory)
 register(ProductFactory)
 register(ProductTypeFactory)
+register(BrandFactory)
