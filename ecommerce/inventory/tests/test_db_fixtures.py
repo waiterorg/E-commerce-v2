@@ -114,3 +114,15 @@ def test_inventory_db_producttype_uniqueness_integrity(
     product_type_factory.create(name="not_unique")
     with pytest.raises(IntegrityError):
         product_type_factory.create(name="not_unique")
+
+
+def test_inventory_db_brand_insert_data(db, brand_factory):
+
+    new_brand = brand_factory.create(name="demo_brand")
+    assert new_brand.name == "demo_brand"
+
+
+def test_inventory_db_brand_uniqueness_integrity(db, brand_factory):
+    brand_factory.create(name="not_unique")
+    with pytest.raises(IntegrityError):
+        brand_factory.create(name="not_unique")
