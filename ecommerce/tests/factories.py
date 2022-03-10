@@ -37,5 +37,13 @@ class ProductFactory(factory.django.DjangoModelFactory):
                 self.category.add(cat)
 
 
+class ProductTypeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.ProductType
+
+    name = factory.Sequence(lambda n: "type_%d" % n)
+
+
 register(CategoryFactory)
 register(ProductFactory)
+register(ProductTypeFactory)
