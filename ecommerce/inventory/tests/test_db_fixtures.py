@@ -149,3 +149,11 @@ def test_inventory_db_product_attribute_insert_data(
     new_attribute = product_attribute_factory.create()
     assert new_attribute.name == "attribute_name_0"
     assert new_attribute.description == "description_0"
+
+
+def test_inventory_db_product_attrubite_uniqueness_integrity(
+    db, product_attribute_factory
+):
+    product_attribute_factory.create(name="not_unique")
+    with pytest.raises(IntegrityError):
+        product_attribute_factory.create(name="not_unique")
