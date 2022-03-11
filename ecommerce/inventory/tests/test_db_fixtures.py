@@ -126,3 +126,18 @@ def test_inventory_db_brand_uniqueness_integrity(db, brand_factory):
     brand_factory.create(name="not_unique")
     with pytest.raises(IntegrityError):
         brand_factory.create(name="not_unique")
+
+
+@pytest.mark.dbfixture
+@pytest.mark.parametrize(
+    "id, name, description",
+    [
+        (1, "men-shoe-size", "men shoe size"),
+    ],
+)
+def test_inventory_db_product_attribute_dataset(
+    db, db_fixture_setup, id, name, description
+):
+    result = models.ProductAttribute.objects.get(id=id)
+    assert result.name == name
+    assert result.description == description
