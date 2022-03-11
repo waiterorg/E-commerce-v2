@@ -141,3 +141,11 @@ def test_inventory_db_product_attribute_dataset(
     result = models.ProductAttribute.objects.get(id=id)
     assert result.name == name
     assert result.description == description
+
+
+def test_inventory_db_product_attribute_insert_data(
+    db, product_attribute_factory
+):
+    new_attribute = product_attribute_factory.create()
+    assert new_attribute.name == "attribute_name_0"
+    assert new_attribute.description == "description_0"
