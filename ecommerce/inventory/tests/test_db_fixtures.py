@@ -353,3 +353,10 @@ def test_inventory_db_stock_dataset(
     assert result_last_checked == last_checked
     assert result.units == units
     assert result.units_sold == units_sold
+
+
+def test_inventory_db_stock_insert_data(db, stock_factory):
+    new_stock = stock_factory.create(product_inventory__sku="123456789")
+    assert new_stock.product_inventory.sku == "123456789"
+    assert new_stock.units == 2
+    assert new_stock.units_sold == 100
