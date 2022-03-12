@@ -360,3 +360,13 @@ def test_inventory_db_stock_insert_data(db, stock_factory):
     assert new_stock.product_inventory.sku == "123456789"
     assert new_stock.units == 2
     assert new_stock.units_sold == 100
+
+
+def test_inventory_db_insert_inventory_product_values(
+    db, product_with_attribute_values_factory
+):
+
+    product_with_attribute_values_factory(sku="123456789")
+    result = models.ProductInventory.objects.get(sku="123456789")
+    count = result.attribute_values.all().count()
+    assert count == 2
