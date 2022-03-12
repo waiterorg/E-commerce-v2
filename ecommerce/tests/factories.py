@@ -102,6 +102,25 @@ class StockFactory(factory.django.DjangoModelFactory):
     units_sold = 100
 
 
+class ProductAttributeValuesFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.ProductAttributeValues
+
+    attributevalues = factory.SubFactory(ProductAttributeValueFactory)
+    productinventory = factory.SubFactory(ProductInventoryFactory)
+
+
+class ProductWithAttributeValuesFactory(ProductInventoryFactory):
+    attributevalues1 = factory.RelatedFactory(
+        ProductAttributeValuesFactory,
+        factory_related_name="productinventory",
+    )
+    attributevalues2 = factory.RelatedFactory(
+        ProductAttributeValuesFactory,
+        factory_related_name="productinventory",
+    )
+
+
 register(CategoryFactory)
 register(ProductFactory)
 register(ProductTypeFactory)
@@ -111,3 +130,4 @@ register(ProductAttributeValueFactory)
 register(ProductInventoryFactory)
 register(MediaFactory)
 register(StockFactory)
+register(ProductWithAttributeValuesFactory)
