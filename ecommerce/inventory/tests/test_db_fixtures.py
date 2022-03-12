@@ -252,3 +252,25 @@ def test_inventory_db_product_inventory_dataset(
     assert result.weight == weight
     assert result_created_at == created_at
     assert result_updated_at == updated_at
+
+
+def test_inventory_db_product_inventory_insert_data(
+    db, product_inventory_factory
+):
+    new_product = product_inventory_factory.create(
+        sku="123456789",
+        upc="123456789",
+        product_type__name="new_name",
+        product__web_id="123456789",
+        brand__name="new_name",
+    )
+    assert new_product.sku == "123456789"
+    assert new_product.upc == "123456789"
+    assert new_product.product_type.name == "new_name"
+    assert new_product.product.web_id == "123456789"
+    assert new_product.brand.name == "new_name"
+    assert new_product.is_active == 1
+    assert new_product.retail_price == 97.00
+    assert new_product.store_price == 92.00
+    assert new_product.sale_price == 46.00
+    assert new_product.weight == 987
