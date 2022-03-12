@@ -320,3 +320,11 @@ def test_inventory_db_media_dataset(
     assert result.is_feature == is_feature
     assert result_created_at == created_at
     assert result_updated_at == updated_at
+
+
+def test_inventory_db_media_insert_data(db, media_factory):
+    new_media = media_factory.create(product_inventory__sku="123456789")
+    assert new_media.product_inventory.sku == "123456789"
+    assert new_media.image == "images/default.png"
+    assert new_media.alt_text == "a default image solid color"
+    assert new_media.is_feature == 1
