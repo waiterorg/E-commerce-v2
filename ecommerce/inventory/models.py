@@ -298,3 +298,23 @@ class ProductInventory(models.Model):
 
     def __str__(self):
         return self.product.name
+
+
+class ProductAttributeValues(models.Model):
+    """
+    Product attribute values link table
+    """
+
+    attributevalues = models.ForeignKey(
+        "ProductAttributeValue",
+        related_name="attributevaluess",
+        on_delete=models.PROTECT,
+    )
+    productinventory = models.ForeignKey(
+        ProductInventory,
+        related_name="productattributevaluess",
+        on_delete=models.PROTECT,
+    )
+
+    class Meta:
+        unique_together = (("attributevalues", "productinventory"),)
