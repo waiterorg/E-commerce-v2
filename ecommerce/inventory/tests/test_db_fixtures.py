@@ -274,3 +274,49 @@ def test_inventory_db_product_inventory_insert_data(
     assert new_product.store_price == 92.00
     assert new_product.sale_price == 46.00
     assert new_product.weight == 987
+
+
+@pytest.mark.dbfixture
+@pytest.mark.parametrize(
+    "id, product_inventory, image, alt_text, is_feature, created_at, updated_at",
+    [
+        (
+            1,
+            1,
+            "images/default.png",
+            "a default image solid color",
+            1,
+            "2021-09-04 22:14:18",
+            "2021-09-04 22:14:18",
+        ),
+        (
+            8616,
+            8616,
+            "images/default.png",
+            "a default image solid color",
+            1,
+            "2021-09-04 22:14:18",
+            "2021-09-04 22:14:18",
+        ),
+    ],
+)
+def test_inventory_db_media_dataset(
+    db,
+    db_fixture_setup,
+    id,
+    product_inventory,
+    image,
+    alt_text,
+    is_feature,
+    created_at,
+    updated_at,
+):
+    result = models.Media.objects.get(id=id)
+    result_created_at = result.created_at.strftime("%Y-%m-%d %H:%M:%S")
+    result_updated_at = result.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+    assert result.product_inventory.id == product_inventory
+    assert result.image == image
+    assert result.alt_text == alt_text
+    assert result.is_feature == is_feature
+    assert result_created_at == created_at
+    assert result_updated_at == updated_at
