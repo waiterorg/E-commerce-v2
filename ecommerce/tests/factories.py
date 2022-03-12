@@ -83,6 +83,16 @@ class ProductInventoryFactory(factory.django.DjangoModelFactory):
     weight = 987
 
 
+class MediaFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Media
+
+    product_inventory = factory.SubFactory(ProductInventoryFactory)
+    image = "images/default.png"
+    alt_text = "a default image solid color"
+    is_feature = True
+
+
 register(CategoryFactory)
 register(ProductFactory)
 register(ProductTypeFactory)
@@ -90,3 +100,4 @@ register(BrandFactory)
 register(ProductAttributeFactory)
 register(ProductAttributeValueFactory)
 register(ProductInventoryFactory)
+register(MediaFactory)
