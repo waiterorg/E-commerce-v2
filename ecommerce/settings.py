@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "ecommerce.demo",
     # External applications
     "mptt",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
