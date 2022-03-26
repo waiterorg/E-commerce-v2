@@ -398,3 +398,23 @@ class Stock(models.Model):
         verbose_name=_("units sold to date"),
         help_text=_("format: required, default-0"),
     )
+
+
+class ProductTypeAttribute(models.Model):
+    """
+    Product type attributes link table
+    """
+
+    product_attribute = models.ForeignKey(
+        ProductAttribute,
+        related_name="productattribute",
+        on_delete=models.PROTECT,
+    )
+    product_type = models.ForeignKey(
+        ProductType,
+        related_name="producttype",
+        on_delete=models.PROTECT,
+    )
+
+    class Meta:
+        unique_together = (("product_attribute", "product_type"),)
