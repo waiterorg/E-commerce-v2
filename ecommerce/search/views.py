@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 from ecommerce.api.serializer import ProductInventorySerializer
 from ecommerce.search.documents import ProductInventoryDocument
 from elasticsearch_dsl import Q
@@ -28,9 +27,11 @@ class SearchProductInventory(APIView, LimitOffsetPagination):
 
             search = self.search_document.search().query(q)
             response = search.execute()
-
+            print(response)
             results = self.paginate_queryset(response, request, view=self)
+            print(results)
             serializer = self.productinvetory_serializer(results, many=True)
+            print(serializer.data)
             return self.get_paginated_response(serializer.data)
 
         except Exception as e:
