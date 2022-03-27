@@ -115,24 +115,6 @@ class Product(models.Model):
         return self.name
 
 
-class ProductType(models.Model):
-    """
-    Product type table
-    """
-
-    name = models.CharField(
-        max_length=255,
-        unique=True,
-        null=False,
-        blank=False,
-        verbose_name=_("type of product"),
-        help_text=_("format: required, unique, max-255"),
-    )
-
-    def __str__(self):
-        return self.name
-
-
 class Brand(models.Model):
     """
     Product brand table
@@ -173,6 +155,30 @@ class ProductAttribute(models.Model):
         return self.name
 
 
+class ProductType(models.Model):
+    """
+    Product type table
+    """
+
+    name = models.CharField(
+        max_length=255,
+        unique=True,
+        null=False,
+        blank=False,
+        verbose_name=_("type of product"),
+        help_text=_("format: required, unique, max-255"),
+    )
+
+    product_type_attributes = models.ManyToManyField(
+        ProductAttribute,
+        related_name="product_type_attributes",
+        through="ProductTypeAttribute",
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class ProductAttributeValue(models.Model):
     """
     Product attribute value table
@@ -191,9 +197,6 @@ class ProductAttributeValue(models.Model):
         verbose_name=_("attribute value"),
         help_text=_("format: required, max-255"),
     )
-
-    def __str__(self):
-        return f"{self.product_attribute.name} : {self.attribute_value}"
 
 
 class ProductInventory(models.Model):
@@ -305,26 +308,6 @@ class ProductInventory(models.Model):
         return self.product.name
 
 
-class ProductAttributeValues(models.Model):
-    """
-    Product attribute values link table
-    """
-
-    attributevalues = models.ForeignKey(
-        "ProductAttributeValue",
-        related_name="attributevaluess",
-        on_delete=models.PROTECT,
-    )
-    productinventory = models.ForeignKey(
-        ProductInventory,
-        related_name="productattributevaluess",
-        on_delete=models.PROTECT,
-    )
-
-    class Meta:
-        unique_together = (("attributevalues", "productinventory"),)
-
-
 class Media(models.Model):
     """
     The product image table.
@@ -403,6 +386,26 @@ class Stock(models.Model):
         verbose_name=_("units sold to date"),
         help_text=_("format: required, default-0"),
     )
+
+
+class ProductAttributeValues(models.Model):
+    """
+    Product attribute values link table
+    """
+
+    attributevalues = models.ForeignKey(
+        "ProductAttributeValue",
+        related_name="attributevaluess",
+        on_delete=models.PROTECT,
+    )
+    productinventory = models.ForeignKey(
+        ProductInventory,
+        related_name="productattributevaluess",
+        on_delete=models.PROTECT,
+    )
+
+    class Meta:
+        unique_together = (("attributevalues", "productinventory"),)
 
 
 class ProductTypeAttribute(models.Model):
