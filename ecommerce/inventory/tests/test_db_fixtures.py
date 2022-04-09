@@ -52,10 +52,10 @@ def test_inventory_db_category_insert_data(
             "2021-09-04 22:14:18",
         ),
         (
-            8616,
-            "45434425",
-            "impact puse dance shoe",
-            "impact-puse-dance-shoe",
+            1253,
+            "45427062",
+            "bsi cross training",
+            "bsi-cross-training",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta, eros vel sollicitudin lacinia, quam metus gravida elit, a elementum nisl neque sit amet orci. Nulla id lorem ac nunc cursus consequat vitae ut orci. In a velit eu justo eleifend tincidunt vel eu turpis. Praesent eu orci egestas, lobortis magna egestas, tincidunt augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean vitae lectus eget tortor laoreet efficitur vel et leo. Maecenas volutpat eget ante id tempor. Etiam posuere ex urna, at aliquet risus tempor eu. Aenean a odio odio. Nunc consectetur lorem ante, interdum ultrices elit consectetur sit amet. Vestibulum rutrum interdum nulla. Cras vel mi a enim eleifend blandit. Curabitur ex dui, rutrum et odio sit amet, auctor euismod massa.",
             1,
             "2021-09-04 22:14:18",
@@ -132,7 +132,7 @@ def test_inventory_db_brand_uniqueness_integrity(db, brand_factory):
 @pytest.mark.parametrize(
     "id, name, description",
     [
-        (1, "men-shoe-size", "men shoe size"),
+        (1, "woman-shoe-size", "men shoe size"),
     ],
 )
 def test_inventory_db_product_attribute_dataset(
@@ -171,7 +171,7 @@ def test_inventory_db_product_attribute_value_dataset(
 ):
     result = models.ProductAttributeValue.objects.get(id=1)
     assert result.product_attribute.id == 1
-    assert result.attribute_value == "10"
+    assert result.attribute_value == "5"
 
 
 def test_inventory_db_product_attribute_value_data(
@@ -191,7 +191,7 @@ def test_inventory_db_product_attribute_value_data(
         (
             1,
             "7633969397",
-            "934093051374",
+            "100000000001",
             1,
             1,
             1,
@@ -204,17 +204,17 @@ def test_inventory_db_product_attribute_value_data(
             "2021-09-04 22:14:18",
         ),
         (
-            8616,
-            "3880741573",
-            "844935525855",
-            1,
-            8616,
             1253,
+            "8038296652",
+            "100000001253",
             1,
-            89.00,
-            84.00,
-            42.00,
-            929,
+            1253,
+            191,
+            1,
+            75.00,
+            70.00,
+            35.00,
+            1057,
             "2021-09-04 22:14:18",
             "2021-09-04 22:14:18",
         ),
@@ -290,8 +290,8 @@ def test_inventory_db_product_inventory_insert_data(
             "2021-09-04 22:14:18",
         ),
         (
-            8616,
-            8616,
+            1253,
+            1253,
             "images/default.png",
             "a default image solid color",
             1,
@@ -335,7 +335,7 @@ def test_inventory_db_media_insert_data(db, media_factory):
     "id, product_inventory, last_checked, units, units_sold",
     [
         (1, 1, "2021-09-04 22:14:18", 135, 0),
-        (8616, 8616, "2021-09-04 22:14:18", 100, 0),
+        (1253, 1253, "2021-09-04 22:14:18", 191, 0),
     ],
 )
 def test_inventory_db_stock_dataset(
