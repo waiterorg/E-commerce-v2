@@ -1,5 +1,12 @@
-from ecommerce.inventory.models import Product, ProductInventory
+from ecommerce.inventory.models import Category, Product, ProductInventory
 from rest_framework import serializers
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ["name", "slug", "is_active"]
+        read_only = True
 
 
 class ProductSerializer(serializers.ModelSerializer):
