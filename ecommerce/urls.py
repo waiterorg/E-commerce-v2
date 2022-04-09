@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from ecommerce.api.views import CategoryList
 from ecommerce.search.views import SearchProductInventory
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("search/<str:query>/", SearchProductInventory.as_view()),
+    path("api/inventory/category/all/", CategoryList.as_view()),
 ]
