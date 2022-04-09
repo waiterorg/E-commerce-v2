@@ -286,6 +286,12 @@ class ProductInventory(models.Model):
             },
         },
     )
+    is_on_sale = models.BooleanField(
+        default=False,
+    )
+    is_digital = models.BooleanField(
+        default=False,
+    )
     weight = models.FloatField(
         unique=False,
         null=False,
@@ -305,7 +311,7 @@ class ProductInventory(models.Model):
     )
 
     def __str__(self):
-        return self.product.name
+        return self.sku
 
 
 class Media(models.Model):
