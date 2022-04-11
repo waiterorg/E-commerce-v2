@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from ecommerce.api.views import CategoryList
+from ecommerce.api.views import CategoryList, ProductByCategory
 from ecommerce.search.views import SearchProductInventory
 
 urlpatterns = [
@@ -24,4 +24,8 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls")),
     path("search/<str:query>/", SearchProductInventory.as_view()),
     path("api/inventory/category/all/", CategoryList.as_view()),
+    path(
+        "api/inventory/products/category/<str:query>/",
+        ProductByCategory.as_view(),
+    ),
 ]
