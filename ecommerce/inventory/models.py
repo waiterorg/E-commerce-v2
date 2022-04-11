@@ -90,7 +90,13 @@ class Product(models.Model):
         verbose_name=_("product description"),
         help_text=_("format: required"),
     )
-    category = TreeManyToManyField(Category)
+    category = models.ForeignKey(
+        Category,
+        related_name="product",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
     is_active = models.BooleanField(
         unique=False,
         null=False,
