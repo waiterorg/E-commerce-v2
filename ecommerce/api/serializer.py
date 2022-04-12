@@ -1,4 +1,9 @@
-from ecommerce.inventory.models import Category, Product, ProductInventory
+from ecommerce.inventory.models import (
+    Brand,
+    Category,
+    Product,
+    ProductInventory,
+)
 from rest_framework import serializers
 
 
@@ -17,9 +22,17 @@ class ProductSerializer(serializers.ModelSerializer):
         editable = False
 
 
-class ProductInventorySerializer(serializers.ModelSerializer):
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = ["name"]
+        read_only = True
+
+
+class ProductInventorySearchSerializer(serializers.ModelSerializer):
 
     product = ProductSerializer(many=False, read_only=True)
+    brand = BrandSerializer(many=False, read_only=True)
 
     class Meta:
         model = ProductInventory
@@ -29,5 +42,6 @@ class ProductInventorySerializer(serializers.ModelSerializer):
             "store_price",
             "is_default",
             "product",
+            "brand",
         ]
         read_only = True
