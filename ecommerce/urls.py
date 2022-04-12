@@ -22,7 +22,7 @@ from ecommerce.search.views import SearchProductInventory
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
-    path("search/<str:query>/", SearchProductInventory.as_view()),
+    path("api/search/<str:query>/", SearchProductInventory.as_view()),
     path("api/inventory/category/all/", CategoryList.as_view()),
     path(
         "api/inventory/products/category/<str:query>/",
