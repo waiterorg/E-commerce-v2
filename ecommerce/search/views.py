@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from ecommerce.api.serializer import ProductInventorySerializer
+from ecommerce.api.serializer import ProductInventorySearchSerializer
 from ecommerce.search.documents import ProductInventoryDocument
 from elasticsearch_dsl import Q
 from rest_framework.pagination import LimitOffsetPagination
@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 
 
 class SearchProductInventory(APIView, LimitOffsetPagination):
-    productinvetory_serializer = ProductInventorySerializer
+    productinvetory_serializer = ProductInventorySearchSerializer
     search_document = ProductInventoryDocument
 
     def get(self, request, query):
