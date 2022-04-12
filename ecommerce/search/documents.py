@@ -7,6 +7,7 @@ from ecommerce.inventory.models import ProductInventory
 class ProductInventoryDocument(Document):
 
     product = fields.ObjectField(properties={"name": fields.TextField()})
+    brand = fields.ObjectField(properties={"name": fields.TextField()})
 
     class Index:
         name = "productinventory"
