@@ -1,8 +1,8 @@
 from typing import List
 
-from ecommerce.inventory.models import Category, Product
+from ecommerce.inventory.models import Category, Product, ProductInventory
 from ninja import NinjaAPI
-from .schema import CategorySchema, ProductSchema
+from .schema import CategorySchema, ProductSchema, InventorySchema
 
 api = NinjaAPI()
 
