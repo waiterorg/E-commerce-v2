@@ -33,4 +33,5 @@ urlpatterns = [
         ProductByCategory.as_view(),
     ),
     path("api/inventory/<int:query>/", ProductInventoryByWebId.as_view()),
+    path("ninja/", include("ecommerce.dninja.urls")),
 ]
