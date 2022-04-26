@@ -1,19 +1,34 @@
 version: "3.8"
 
 services:
+
+  web:
+    restart: always
+    container_name: web_ecommercev2
+    build:
+      context: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - pgdb
+
   pgdb:
-    container_name: pgdb_ecommerce
+    container_name: pgdb_ecommercev2
     image: postgres
     restart: always
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
   elasticsearch:
-    container_name: search
+    container_name: elasticsearch_ecommercev2
     image: elasticsearch:7.14.2
     environment:
       - cluster.name=ecommerce-elasticsearch
