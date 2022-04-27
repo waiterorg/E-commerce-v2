@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "ecommerce.demo",
     "ecommerce.api",
     "ecommerce.search",
+    "ecommerce.promotion",
     # External applications
     "mptt",
     "rest_framework",
