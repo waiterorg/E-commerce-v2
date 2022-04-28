@@ -6,7 +6,9 @@ from ecommerce.inventory.models import ProductInventory
 @registry.register_document
 class ProductInventoryDocument(Document):
 
-    product = fields.ObjectField(properties={"name": fields.TextField()})
+    product = fields.ObjectField(
+        properties={"name": fields.TextField(), "web_id": fields.TextField()}
+    )
     brand = fields.ObjectField(properties={"name": fields.TextField()})
 
     class Index:
