@@ -147,3 +147,6 @@ REST_FRAMEWORK = {
 ELASTICSEARCH_DSL = {
     "default": {"hosts": "elasticsearch"},
 }
+
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
