@@ -21,3 +21,5 @@ class PromotionList(admin.ModelAdmin):
 
 
 admin.site.register(models.Promotion, PromotionList)
+admin.site.register(models.PromoType)
+admin.site.register(models.Coupon)
