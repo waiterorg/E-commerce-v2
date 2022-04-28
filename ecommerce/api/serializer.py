@@ -1,3 +1,7 @@
+from itertools import product
+
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 from ecommerce.inventory.models import (
     Brand,
     Category,
@@ -8,6 +12,7 @@ from ecommerce.inventory.models import (
     ProductInventory,
     ProductType,
 )
+from ecommerce.promotion.models import Promotion
 from rest_framework import serializers
 
 
@@ -37,6 +42,7 @@ class ProductInventorySearchSerializer(serializers.ModelSerializer):
 
     product = ProductSerializer(many=False, read_only=True)
     brand = BrandSerializer(many=False, read_only=True)
+    promotion_price = serializers.SerializerMethodField()
 
     class Meta:
         model = ProductInventory
@@ -47,8 +53,20 @@ class ProductInventorySearchSerializer(serializers.ModelSerializer):
             "is_default",
             "product",
             "brand",
+            "promotion_price",
         ]
         read_only = True
+
+    def get_promotion_price(self, obj):
+
+        try:
+            x = Promotion.products_on_promotion.through.objects.get(
+                Q(promotion_id__is_active=True)
+                & Q(product_inventory_id=obj.id)
+            )
+            return x.promo_price
+        except ObjectDoesNotExist:
+            return None
 
 
 class ProductMediaSerializer(serializers.ModelSerializer):
@@ -80,6 +98,7 @@ class ProductInventorySerializer(serializers.ModelSerializer):
     attributes = ProductAttributeValueSerializer(
         source="attribute_values", many=True, read_only=True
     )
+    promotion_price = serializers.SerializerMethodField()
 
     class Meta:
         model = ProductInventory
@@ -95,5 +114,17 @@ class ProductInventorySerializer(serializers.ModelSerializer):
             "media",
             "attributes",
             "product_type",
+            "promotion_price",
         ]
         read_only = True
+
+    def get_promotion_price(self, obj):
+
+        try:
+            x = Promotion.products_on_promotion.through.objects.get(
+                Q(promotion_id__is_active=True)
+                & Q(product_inventory_id=obj.id)
+            )
+            return x.promo_price
+        except ObjectDoesNotExist:
+            return None
