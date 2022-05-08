@@ -1,0 +1,22 @@
+name: Ecommerce Test
+
+on: [push, pull_request]
+
+jobs:
+
+  test:
+    name: Test Code
+    runs-on: ${{ matrix.ubuntu }}
+    strategy:
+      matrix:
+        python: ["3.8"]
+        ubuntu: ["ubuntu-latest"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Python Environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '${{ matrix.python }}'
+      - name: Run Docker Container
+        run: docker-compose up -d
