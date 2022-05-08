@@ -19,3 +19,14 @@ For Start the server and check it out `python manage.py runserver` .
 
 ## API Endpoints
 For check api endpoints `http://127.0.0.1:8000/swagger/`
+
+## Technologies
+  - Python
+  - Django
+  - PostgreSQL
+  - Redis
+  - Celery
+  - Elasticsearch
+  - DRF
+  - Pytest
+  - Docker
