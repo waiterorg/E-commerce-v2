@@ -16,3 +16,6 @@ For migrate and migration and load fixtures to database follow this command `pyt
 
 ## Run server
 For Start the server and check it out `python manage.py runserver` .
+
+## API Endpoints
+For check api endpoints `http://127.0.0.1:8000/swagger/`
