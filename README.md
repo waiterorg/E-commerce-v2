@@ -21,12 +21,12 @@ For Start the server and check it out `python manage.py runserver` .
 For check api endpoints `http://127.0.0.1:8000/swagger/`
 
 ## Technologies
-  - Python
-  - Django
-  - PostgreSQL
-  - Redis
-  - Celery
-  - Elasticsearch
-  - DRF
-  - Pytest
-  - Docker
+  - [Python](https://www.python.org/)
+  - [Django](https://www.djangoproject.com/)
+  - [PostgreSQL](https://www.postgresql.org/)
+  - [Redis](https://redis.com/)
+  - [Celery](https://docs.celeryq.dev/)
+  - [Elasticsearch](https://www.elastic.co/)
+  - [DRF](https://www.django-rest-framework.org/)
+  - [Pytest](https://docs.pytest.org/)
+  - [Docker](https://www.docker.com/)
